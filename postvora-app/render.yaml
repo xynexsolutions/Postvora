@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: postvora
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_URL
+        sync: false
+      - key: APP_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: DATA_DIR
+        value: /var/data
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+    disk:
+      name: postvora-data
+      mountPath: /var/data
+      sizeGB: 1

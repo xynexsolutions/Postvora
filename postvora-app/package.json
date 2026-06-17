@@ -1,0 +1,15 @@
+{
+  "name": "social-media-automation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Postvora social media automation SaaS with account linking, scheduling, analytics, and API workflows.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "migrate:supabase": "node scripts/migrate-local-db-to-supabase.mjs",
+    "verify:supabase": "node scripts/verify-supabase-runtime.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

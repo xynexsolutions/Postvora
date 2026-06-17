@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Postvora AI social media automation platform">
+    <title>Postvora</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#overview" aria-label="Postvora home">
+          <span class="brand-logo">
+            <img class="brand-logo-dark" src="/assets/postvora-logo-dark.png" alt="Postvora logo">
+            <img class="brand-logo-light" src="/assets/postvora-logo-light.png" alt="Postvora logo">
+          </span>
+        </a>
+
+        <nav class="nav-list" aria-label="Primary">
+          <a class="nav-link active" href="#overview" data-view="overview">Overview</a>
+          <a class="nav-link" href="#composer" data-view="composer">Composer</a>
+          <a class="nav-link" href="#accounts" data-view="accounts">Accounts</a>
+          <a class="nav-link" href="#queue" data-view="queue">Queue</a>
+          <a class="nav-link" href="#automation" data-view="automation">Automation</a>
+          <a class="nav-link" href="#developers" data-view="developers">Developers</a>
+          <a class="nav-link hidden" href="#admin" data-view="admin">Admin</a>
+        </nav>
+
+        <section class="sidebar-panel">
+          <div class="mini-label">Workspace</div>
+          <strong id="workspaceName">Postvora Studio</strong>
+          <span id="workspacePlan">Launch plan</span>
+        </section>
+
+        <section class="sidebar-panel sidebar-controls">
+          <button class="google-button" type="button" title="Login with Google">
+            <span><img src="/assets/google-logo.svg" alt=""></span>
+            Login with Google
+          </button>
+          <div id="authUser" class="auth-user hidden"></div>
+          <div class="sidebar-control-row">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light and dark mode">
+              <span class="theme-toggle-track">
+                <span class="theme-toggle-thumb"></span>
+              </span>
+              <strong id="themeLabel">Dark</strong>
+            </button>
+            <button id="refreshBtn" class="icon-button" type="button" title="Refresh" aria-label="Refresh">&#8635;</button>
+          </div>
+          <span id="statusPill" class="status-pill">Loading</span>
+        </section>
+
+        <footer class="sidebar-footer">
+          <span>Powered by Xynex Solutions</span>
+          <span>Private automation platform</span>
+        </footer>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Postvora workspace</p>
+            <h1>Create, schedule, and publish with AI</h1>
+            <span class="topbar-subtitle">Create, schedule, publish, and grow from one AI-powered command center.</span>
+          </div>
+        </header>
+
+        <section id="overview" class="view active" data-view-panel="overview">
+          <div class="hero-band">
+            <div>
+              <span class="hero-kicker">Postvora</span>
+              <h2>Welcome back. Let's create something amazing today.</h2>
+              <p><strong class="hero-tagline">Create, schedule, and publish with AI</strong> Connect accounts, preview every post, schedule campaigns, and publish with a refined AI workflow built for modern social teams.</p>
+              <div class="hero-proof">
+                <span>OAuth connect center</span>
+                <span>Scheduling queue</span>
+                <span>Developer API</span>
+                <span>Powered by Xynex Solutions</span>
+              </div>
+            </div>
+            <div class="hero-actions">
+              <div class="app-flow-visual" aria-hidden="true">
+                <span>Connect</span>
+                <i></i>
+                <span>Create</span>
+                <i></i>
+                <span>Schedule</span>
+                <i></i>
+                <span>Publish</span>
+              </div>
+              <a class="primary-button" href="#composer" data-jump="composer">Create campaign</a>
+              <a class="secondary-button" href="#accounts" data-jump="accounts">Link accounts</a>
+            </div>
+          </div>
+
+          <div class="metrics-grid" id="metricsGrid"></div>
+
+          <section class="dashboard-board">
+            <div class="board-main">
+              <div class="section-title">
+                <span>Connected channels</span>
+                <a href="#accounts" data-jump="accounts">Manage accounts</a>
+              </div>
+              <div id="providerStrip" class="provider-strip"></div>
+
+              <div class="overview-grid">
+                <article class="post-preview-card">
+                  <div class="section-title">
+                    <span>Next post</span>
+                    <a href="#queue" data-jump="queue">View schedule</a>
+                  </div>
+                  <div id="nextPostPreview" class="next-post-preview"></div>
+                </article>
+
+                <article class="account-overview-card">
+                  <div class="section-title">
+                    <span>Account overview</span>
+                    <span class="muted">Live</span>
+                  </div>
+                  <div id="accountOverview" class="account-overview"></div>
+                </article>
+              </div>
+
+              <article class="recent-posts-card">
+                <div class="section-title">
+                  <span>Recent posts</span>
+                  <a href="#queue" data-jump="queue">View all</a>
+                </div>
+                <div id="recentPosts" class="recent-posts"></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel event-panel">
+            <div class="section-title">
+              <span>Event stream</span>
+              <span class="muted">Live log</span>
+            </div>
+            <div id="eventList" class="event-list"></div>
+          </section>
+        </section>
+
+        <section id="composer" class="view" data-view-panel="composer">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Campaign composer</p>
+              <h2>Create once, tailor per platform.</h2>
+            </div>
+          </div>
+
+          <form id="postForm" class="composer-grid">
+            <section class="panel composer-panel">
+              <label class="field">
+                <span>Caption</span>
+                <textarea id="postText" rows="9" maxlength="2200" placeholder="Write the caption, offer, announcement, or campaign note..."></textarea>
+              </label>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>Media URL or uploaded image</span>
+                  <input id="mediaUrl" type="url" placeholder="https://cdn.yourbrand.com/video.mp4">
+                </label>
+                <label class="field">
+                  <span>Campaign</span>
+                  <input id="campaignName" type="text" placeholder="Summer Launch">
+                </label>
+              </div>
+
+              <div class="upload-card">
+                <label class="upload-drop">
+                  <input id="mediaFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+                  <span>Upload image</span>
+                  <strong>Drop or choose a JPG, PNG, WebP, or GIF</strong>
+                </label>
+                <div id="mediaPreview" class="media-preview hidden"></div>
+              </div>
+
+              <label class="field">
+                <span>Schedule date</span>
+                <input id="scheduleDate" type="datetime-local">
+              </label>
+
+              <div class="composer-footer">
+                <div class="char-meter">
+                  <strong id="charCount">0</strong>
+                  <span>characters</span>
+                </div>
+                <div class="button-row">
+                  <button id="draftBtn" class="secondary-button" type="button">Save draft</button>
+                  <button class="primary-button" type="submit">Publish or schedule</button>
+                </div>
+              </div>
+            </section>
+
+            <aside class="panel">
+              <div class="section-title">
+                <span>Selected channels</span>
+                <button id="selectAllBtn" class="text-button" type="button">Select all</button>
+              </div>
+              <div id="platformPicker" class="platform-picker"></div>
+            </aside>
+          </form>
+        </section>
+
+        <section id="accounts" class="view" data-view-panel="accounts">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Account linking</p>
+              <h2>OAuth-style connect center with safe demo fallback.</h2>
+            </div>
+          </div>
+          <div id="providers" class="accounts-grid"></div>
+        </section>
+
+        <section id="queue" class="view" data-view-panel="queue">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Publishing queue</p>
+              <h2>Scheduled, blocked, and published jobs.</h2>
+            </div>
+          </div>
+          <div class="queue-tabs" id="queueTabs">
+            <button class="active" type="button" data-queue-filter="all">All posts</button>
+            <button type="button" data-queue-filter="scheduled">Scheduled</button>
+            <button type="button" data-queue-filter="published">Published</button>
+            <button type="button" data-queue-filter="blocked">Needs attention</button>
+          </div>
+          <div id="activityList" class="activity-list"></div>
+        </section>
+
+        <section id="automation" class="view" data-view-panel="automation">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">AI automation</p>
+              <h2>Rules that prepare campaigns faster.</h2>
+            </div>
+          </div>
+          <div id="automationList" class="automation-list"></div>
+        </section>
+
+        <section id="developers" class="view" data-view-panel="developers">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Developer API</p>
+              <h2>Expose your own unified posting API.</h2>
+            </div>
+          </div>
+
+          <div class="two-column">
+            <section class="panel">
+              <div class="section-title">
+                <span>Profile key</span>
+                <button id="regenKeyBtn" class="text-button" type="button">Regenerate</button>
+              </div>
+              <code id="apiKey" class="api-key">Loading</code>
+              <p class="helper-text">Store this server-side only. Your public app should call your backend, not expose platform tokens.</p>
+            </section>
+
+            <section class="panel">
+              <div class="section-title">
+                <span>Example request</span>
+                <span class="muted">Unified API</span>
+              </div>
+              <pre class="code-block"><code>POST /api/post
+{
+  "text": "Launch announcement",
+  "platforms": ["instagram", "linkedin"],
+  "mediaUrl": "https://cdn.example.com/asset.mp4",
+  "scheduleDate": "2026-07-08T12:30"
+}</code></pre>
+            </section>
+          </div>
+        </section>
+
+        <section id="admin" class="view" data-view-panel="admin">
+          <div class="page-heading centered-heading">
+            <div>
+              <p class="eyebrow">Admin backend</p>
+              <h2>SaaS control center</h2>
+              <span class="topbar-subtitle">Users, usage, subscriptions, audit logs, and platform health.</span>
+            </div>
+          </div>
+          <div id="adminPanel" class="admin-panel"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="editPostModal" class="modal-shell hidden" role="dialog" aria-modal="true" aria-labelledby="editPostTitle">
+      <form id="editPostForm" class="edit-modal">
+        <div class="section-title">
+          <div>
+            <span id="editPostTitle">Edit post</span>
+            <small id="editPostHint" class="muted">Update the local campaign record and queue settings.</small>
+          </div>
+          <button class="icon-button" type="button" data-close-edit aria-label="Close edit post">&#215;</button>
+        </div>
+
+        <label class="field">
+          <span>Caption</span>
+          <textarea id="editPostText" rows="7" maxlength="2200"></textarea>
+        </label>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Media URL</span>
+            <input id="editPostMedia" type="url" placeholder="https://cdn.yourbrand.com/image.jpg">
+          </label>
+          <label class="field">
+            <span>Schedule date</span>
+            <input id="editPostSchedule" type="datetime-local">
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="secondary-button" type="button" data-close-edit>Cancel</button>
+          <button class="primary-button" type="submit">Save changes</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
